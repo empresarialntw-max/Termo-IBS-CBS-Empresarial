@@ -19,7 +19,7 @@ window.CONFIG = {
      false = envio ligado. Só mude para false depois de publicar o
              Apps Script e colar o endereço em ENDPOINT abaixo.
      ---------------------------------------------------------------- */
-  MODO_DEMO: true,
+  MODO_DEMO: false,
 
   /* ----------------------------------------------------------------
      ENDEREÇO DE ENVIO
@@ -27,7 +27,7 @@ window.CONFIG = {
      Script (ver apps-script/Codigo.gs e o README).
      Formato: https://script.google.com/macros/s/AKfycb.../exec
      ---------------------------------------------------------------- */
-  ENDPOINT: '',
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbyMP8k0cEdZ1c7x5a7BX9GwcF-6Bz5dhbCw5xaTyw-RWfxlvs9xpPo9Qnp4HZjVhRD2Gg/exec',
 
   /* Quem recebe o termo. Só aparece nos textos da tela — o destino
      real é definido dentro do Apps Script. */
