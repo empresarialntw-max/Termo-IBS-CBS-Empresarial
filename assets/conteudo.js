@@ -78,7 +78,6 @@ window.CONTEUDO = {
       "As regras relacionadas à Reforma Tributária decorrem, entre outras normas, da Emenda Constitucional nº 132/2023 e da Lei Complementar nº 214/2025.",
       "Para as empresas optantes pelo Simples Nacional, foram estabelecidas regras específicas relacionadas à forma de recolhimento do IBS e da CBS, permitindo que a empresa avalie a manutenção do recolhimento dentro do regime do Simples Nacional ou, quando aplicável, a opção pelo recolhimento desses tributos pelo regime regular.",
       "Essa decisão deve considerar as características e particularidades de cada empresa, incluindo seu perfil de clientes, operações, possibilidade de aproveitamento de créditos e potenciais impactos tributários, financeiros, comerciais e operacionais.",
-      "A Empresarial Assessoria Contábil realizou previamente a análise técnica da empresa e apresentou ao cliente as orientações e recomendações aplicáveis ao seu caso.",
       "Este formulário tem exclusivamente a finalidade de registrar a ciência e formalizar a decisão da empresa."
     ]
   },
@@ -104,7 +103,7 @@ window.CONTEUDO = {
     ]
   },
   "decisao": {
-    "chamada": "Após a análise técnica realizada pela Empresarial Assessoria Contábil, a empresa deverá formalizar sua decisão entre as alternativas aplicáveis ao seu caso. Nesta etapa as alternativas são apresentadas apenas para leitura; a escolha ocorre na etapa de formalização.",
+    "chamada": "Após a análise, a empresa deverá formalizar sua decisão entre as alternativas aplicáveis ao seu caso. Nesta etapa as alternativas são apresentadas apenas para leitura; a escolha ocorre na etapa de formalização.",
     "opcoes": [
       {
         "id": "SIMPLES_NACIONAL",
@@ -163,7 +162,6 @@ window.CONTEUDO = {
     "titulo": "Declaração de ciência e decisão",
     "paragrafos": [
       "Declaro, na qualidade de responsável pela empresa identificada neste formulário, que recebi as informações e orientações necessárias relacionadas à decisão apresentada.",
-      "Declaro estar ciente de que a Empresarial Assessoria Contábil realizou previamente a análise e orientação técnica aplicável à empresa.",
       "Após tomar ciência das informações apresentadas, manifesto formalmente a decisão selecionada neste formulário.",
       "Declaro que as informações fornecidas são verdadeiras e que possuo poderes ou autorização para representar a empresa nesta manifestação."
     ],
