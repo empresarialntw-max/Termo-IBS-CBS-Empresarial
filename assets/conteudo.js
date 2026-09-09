@@ -31,7 +31,7 @@ window.CONFIG = {
 
   /* Quem recebe o termo. Só aparece nos textos da tela — o destino
      real é definido dentro do Apps Script. */
-  EMAIL_ESCRITORIO: 'contato@empresarialsc.com.br'
+  EMAIL_ESCRITORIO: 'empresarialntw@gmail.com'
 };
 
 /* ------------------------------------------------------------------
@@ -47,7 +47,7 @@ window.CONTEUDO = {
     "nome": "Empresarial Assessoria Contábil",
     "nomeCurto": "Empresarial",
     "endereco": "R. dos Guajajaras, 40, sala 605 — Centro, Belo Horizonte/MG",
-    "emailDestino": "contato@empresarialsc.com.br",
+    "emailDestino": "empresarialntw@gmail.com",
     "site": "empresarialsc.com.br"
   },
   "documento": {
