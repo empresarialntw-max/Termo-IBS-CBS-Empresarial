@@ -29,6 +29,16 @@
   var idsCiencia = [];
 
   var $ = function (seletor) { return document.querySelector(seletor); };
+
+  /**
+   * Valor de um campo pelo id, tolerante a campo ausente.
+   * Se o HTML e o JS ficarem em versões diferentes (um arquivo atualizado e o
+   * outro não), o formulário continua funcionando em vez de travar.
+   */
+  var valorDe = function (id) {
+    var campo = document.getElementById(id);
+    return campo ? String(campo.value || '').trim() : '';
+  };
   var $$ = function (seletor) { return Array.prototype.slice.call(document.querySelectorAll(seletor)); };
 
   /* ---------------------------------------------------------------- */
@@ -165,11 +175,31 @@
     }
     conteudo = window.CONTEUDO;
     idsCiencia = conteudo.ciencia.itens.map(function (item) { return item.id; });
-    renderizarConteudo();
+    try {
+      renderizarConteudo();
+    } catch (falha) {
+      avisar('Parte do conteúdo não pôde ser exibida.', [
+        'Recarregue a página. Se continuar, avise o escritório.'
+      ]);
+    }
     return Promise.resolve();
   }
 
+  /** Escreve em um elemento só se ele existir — protege contra HTML de outra versão. */
+  function definirTexto(seletor, texto) {
+    var alvo = $(seletor);
+    if (alvo) alvo.textContent = texto;
+    return alvo;
+  }
+
+  function definirHtml(seletor, html) {
+    var alvo = $(seletor);
+    if (alvo) alvo.innerHTML = html;
+    return alvo;
+  }
+
   function paragrafosPara(elemento, lista) {
+    if (!elemento) return;
     elemento.innerHTML = lista
       .map(function (texto) { return '<p>' + texto + '</p>'; })
       .join('');
@@ -223,9 +253,8 @@
     }
     paragrafosPara($('#reconsideracaoParagrafos'), conteudo.reconsideracaoTexto.paragrafos);
     if (conteudo.reconsideracaoTexto.aviso) {
-      var alvoAviso = $('#reconsideracaoAviso');
-      alvoAviso.textContent = conteudo.reconsideracaoTexto.aviso;
-      alvoAviso.hidden = false;
+      var alvoAviso = definirTexto('#reconsideracaoAviso', conteudo.reconsideracaoTexto.aviso);
+      if (alvoAviso) alvoAviso.hidden = false;
     }
 
     $('#alertaTitulo').textContent = conteudo.alerta.titulo;
@@ -353,17 +382,17 @@
     var erros = [];
 
     if (etapa === 1) {
-      if ($('#razaoSocial').value.trim().length < 3) {
+      if (valorDe('razaoSocial').length < 3) {
         mostrarErro('razaoSocial', 'Informe a razão social da empresa.');
         marcarInvalido('razaoSocial');
         erros.push('Razão social');
       }
-      if (!validarCNPJ($('#cnpj').value)) {
+      if (!validarCNPJ(valorDe('cnpj'))) {
         mostrarErro('cnpj', 'CNPJ inválido. Confira os números digitados.');
         marcarInvalido('cnpj');
         erros.push('CNPJ');
       }
-      if (!validarEmail($('#emailEmpresa').value)) {
+      if (!validarEmail(valorDe('emailEmpresa'))) {
         mostrarErro('emailEmpresa', 'Informe um e-mail válido.');
         marcarInvalido('emailEmpresa');
         erros.push('E-mail da empresa');
@@ -371,29 +400,29 @@
     }
 
     if (etapa === 2) {
-      var nome = $('#nomeResponsavel').value.trim();
+      var nome = valorDe('nomeResponsavel');
       if (nome.length < 5 || nome.indexOf(' ') === -1) {
         mostrarErro('nomeResponsavel', 'Informe o nome completo (nome e sobrenome).');
         marcarInvalido('nomeResponsavel');
         erros.push('Nome do responsável');
       }
-      if (!validarCPF($('#cpf').value)) {
+      if (!validarCPF(valorDe('cpf'))) {
         mostrarErro('cpf', 'CPF inválido. Confira os números digitados.');
         marcarInvalido('cpf');
         erros.push('CPF');
       }
-      if ($('#cargo').value.trim().length < 2) {
+      if (valorDe('cargo').length < 2) {
         mostrarErro('cargo', 'Informe o cargo ou função.');
         marcarInvalido('cargo');
         erros.push('Cargo');
       }
-      if (!validarEmail($('#emailResponsavel').value)) {
+      if (!validarEmail(valorDe('emailResponsavel'))) {
         mostrarErro('emailResponsavel', 'Informe um e-mail válido.');
         marcarInvalido('emailResponsavel');
         erros.push('E-mail do responsável');
       }
       // O telefone é o canal de contato do escritório durante a campanha.
-      if (digitos($('#telefoneResponsavel').value).length < 10) {
+      if (digitos(valorDe('telefoneResponsavel')).length < 10) {
         mostrarErro('telefoneResponsavel', 'Informe um telefone com DDD.');
         marcarInvalido('telefoneResponsavel');
         erros.push('Telefone do responsável');
@@ -432,12 +461,12 @@
     }
 
     if (etapa === 7) {
-      if ($('#assinaturaNome').value.trim().length < 5) {
+      if (valorDe('assinaturaNome').length < 5) {
         mostrarErro('assinaturaNome', 'Informe o nome completo.');
         marcarInvalido('assinaturaNome');
         erros.push('Nome da assinatura');
       }
-      if (!validarCPF($('#assinaturaCpf').value)) {
+      if (!validarCPF(valorDe('assinaturaCpf'))) {
         mostrarErro('assinaturaCpf', 'CPF inválido.');
         marcarInvalido('assinaturaCpf');
         erros.push('CPF da assinatura');
@@ -639,8 +668,8 @@
     assinatura.preparar();
     var campoNome = $('#assinaturaNome');
     var campoCpf = $('#assinaturaCpf');
-    if (!campoNome.value) campoNome.value = $('#nomeResponsavel').value.trim();
-    if (!campoCpf.value) campoCpf.value = mascaraCPF($('#cpf').value);
+    if (!campoNome.value) campoNome.value = valorDe('nomeResponsavel');
+    if (!campoCpf.value) campoCpf.value = mascaraCPF(valorDe('cpf'));
     $('#assinaturaData').value = dataBR();
   }
 
@@ -667,6 +696,17 @@
   }
 
   function montarRevisao() {
+    try {
+      montarRevisaoInterna();
+    } catch (falha) {
+      $('#revisao').innerHTML =
+        '<div class="revisao__bloco"><p class="revisao__decisao-texto">' +
+        'Não foi possível montar o resumo. Volte às etapas anteriores e confira os dados.' +
+        '</p></div>';
+    }
+  }
+
+  function montarRevisaoInterna() {
     var opcao = opcaoEscolhida();
     var itensCiencia = conteudo.ciencia.itens.map(function (item) {
       return '<li>' + item.checkbox + '</li>';
@@ -680,20 +720,20 @@
     $('#revisao').innerHTML =
       '<div class="revisao__bloco">' +
       '<h2 class="revisao__titulo">Empresa</h2>' +
-      linhaRevisao('Razão social', $('#razaoSocial').value.trim()) +
-      linhaRevisao('Nome fantasia', $('#nomeFantasia').value.trim()) +
-      linhaRevisao('CNPJ', mascaraCNPJ($('#cnpj').value)) +
-      linhaRevisao('E-mail', $('#emailEmpresa').value.trim()) +
-      linhaRevisao('Telefone', $('#telefoneEmpresa').value.trim()) +
+      linhaRevisao('Razão social', valorDe('razaoSocial')) +
+      linhaRevisao('Nome fantasia', valorDe('nomeFantasia')) +
+      linhaRevisao('CNPJ', mascaraCNPJ(valorDe('cnpj'))) +
+      linhaRevisao('E-mail', valorDe('emailEmpresa')) +
+      linhaRevisao('Telefone', valorDe('telefoneEmpresa')) +
       '</div>' +
 
       '<div class="revisao__bloco">' +
       '<h2 class="revisao__titulo">Responsável</h2>' +
-      linhaRevisao('Nome', $('#nomeResponsavel').value.trim()) +
-      linhaRevisao('CPF', mascaraCPF($('#cpf').value)) +
-      linhaRevisao('Cargo / função', $('#cargo').value.trim()) +
-      linhaRevisao('E-mail', $('#emailResponsavel').value.trim()) +
-      linhaRevisao('Telefone', $('#telefoneResponsavel').value.trim()) +
+      linhaRevisao('Nome', valorDe('nomeResponsavel')) +
+      linhaRevisao('CPF', mascaraCPF(valorDe('cpf'))) +
+      linhaRevisao('Cargo / função', valorDe('cargo')) +
+      linhaRevisao('E-mail', valorDe('emailResponsavel')) +
+      linhaRevisao('Telefone', valorDe('telefoneResponsavel')) +
       '</div>' +
 
       '<div class="revisao__bloco revisao__bloco--decisao">' +
@@ -712,9 +752,9 @@
       (imagem
         ? '<div class="revisao__assinatura"><img src="' + imagem + '" alt="Assinatura capturada"></div>'
         : '<p class="revisao__decisao-texto">Assinatura não capturada.</p>') +
-      linhaRevisao('Assinado por', $('#assinaturaNome').value.trim()) +
-      linhaRevisao('CPF', mascaraCPF($('#assinaturaCpf').value)) +
-      linhaRevisao('Data', $('#assinaturaData').value) +
+      linhaRevisao('Assinado por', valorDe('assinaturaNome')) +
+      linhaRevisao('CPF', mascaraCPF(valorDe('assinaturaCpf'))) +
+      linhaRevisao('Data', valorDe('assinaturaData')) +
       '</div>';
   }
 
@@ -723,36 +763,41 @@
   /* ---------------------------------------------------------------- */
 
   function montarPayload() {
-    var aceites = { contexto: $('#chkContexto').checked };
+    function marcado(id) {
+      var campo = document.getElementById(id);
+      return !!(campo && campo.checked);
+    }
+
+    var aceites = { contexto: marcado('chkContexto') };
     idsCiencia.forEach(function (id) {
-      aceites[id] = document.getElementById('chk_' + id).checked;
+      aceites[id] = marcado('chk_' + id);
     });
-    aceites.declaracaoFinal = $('#chkDeclaracao').checked;
-    aceites.privacidade = $('#chkPrivacidade').checked;
+    aceites.declaracaoFinal = marcado('chkDeclaracao');
+    aceites.privacidade = marcado('chkPrivacidade');
 
     var opcao = opcaoEscolhida();
 
     return {
       empresa: {
-        razaoSocial: $('#razaoSocial').value.trim(),
-        nomeFantasia: $('#nomeFantasia').value.trim(),
-        cnpj: digitos($('#cnpj').value),
-        email: $('#emailEmpresa').value.trim(),
-        telefone: $('#telefoneEmpresa').value.trim()
+        razaoSocial: valorDe('razaoSocial'),
+        nomeFantasia: valorDe('nomeFantasia'),
+        cnpj: digitos(valorDe('cnpj')),
+        email: valorDe('emailEmpresa'),
+        telefone: valorDe('telefoneEmpresa')
       },
       responsavel: {
-        nome: $('#nomeResponsavel').value.trim(),
-        cpf: digitos($('#cpf').value),
-        cargo: $('#cargo').value.trim(),
-        email: $('#emailResponsavel').value.trim(),
-        telefone: $('#telefoneResponsavel').value.trim()
+        nome: valorDe('nomeResponsavel'),
+        cpf: digitos(valorDe('cpf')),
+        cargo: valorDe('cargo'),
+        email: valorDe('emailResponsavel'),
+        telefone: valorDe('telefoneResponsavel')
       },
       decisao: opcao ? opcao.id : '',
       aceites: aceites,
       assinatura: {
-        nome: $('#assinaturaNome').value.trim(),
-        cpf: digitos($('#assinaturaCpf').value),
-        data: $('#assinaturaData').value,
+        nome: valorDe('assinaturaNome'),
+        cpf: digitos(valorDe('assinaturaCpf')),
+        data: valorDe('assinaturaData'),
         imagem: assinatura.exportar()
       },
       versaoConteudo: conteudo.versaoConteudo
@@ -969,9 +1014,23 @@
     $('#btnConfirmar').disabled = true;
 
     var agora = new Date();
-    var dados = montarPayload();
-    var opcao = opcaoEscolhida();
-    var protocolo = gerarProtocolo(agora);
+    var dados, opcao, protocolo;
+
+    // Falha aqui não pode deixar o cliente preso na tela de processamento.
+    try {
+      dados = montarPayload();
+      opcao = opcaoEscolhida();
+      protocolo = gerarProtocolo(agora);
+    } catch (falha) {
+      enviando = false;
+      $('#processando').hidden = true;
+      $('#btnConfirmar').disabled = false;
+      avisar('Não foi possível montar o termo.', [
+        'Recarregue a página e tente novamente. Se persistir, avise o escritório.'
+      ]);
+      return;
+    }
+
     var baseCodigo = [
       protocolo,
       agora.toISOString(),
