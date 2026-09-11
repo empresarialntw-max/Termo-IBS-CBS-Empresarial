@@ -41,7 +41,7 @@ window.CONFIG = {
    ------------------------------------------------------------------ */
 
 window.CONTEUDO = {
-  "versaoConteudo": "1.0",
+  "versaoConteudo": "1.1",
   "vigenteEm": "2026-09-08",
   "escritorio": {
     "nome": "Empresarial Assessoria Contábil",
@@ -127,7 +127,8 @@ window.CONTEUDO = {
     "paragrafos": [
       "Após a formalização da decisão, a legislação e a regulamentação aplicáveis poderão estabelecer prazo específico para cancelamento ou reconsideração da opção pelo regime regular de recolhimento do IBS e da CBS.",
       "Quando houver previsão regulamentar, a empresa deverá observar rigorosamente o prazo estabelecido para eventual cancelamento ou revisão da opção."
-    ]
+    ],
+    "aviso": "Ainda que o prazo se encerre em 30/09/2026, preencha e envie este termo o quanto antes. A formalização da decisão é feita pela contabilidade dentro do Portal do Simples Nacional, que tem apresentado instabilidades frequentes por causa da alta demanda deste mês. Quanto antes recebermos a sua manifestação, maior a margem para concluir o procedimento dentro do prazo."
   },
   "alerta": {
     "titulo": "Importante",
@@ -150,11 +151,6 @@ window.CONTEUDO = {
         "id": "impactos",
         "declaracao": "Declaro que estou ciente de que a decisão adotada poderá gerar impactos tributários, financeiros, comerciais e operacionais para a empresa.",
         "checkbox": "Estou ciente dos possíveis impactos decorrentes da decisão adotada pela empresa."
-      },
-      {
-        "id": "orientacaoPrevia",
-        "declaracao": "Declaro que a análise técnica e as orientações relacionadas à empresa foram previamente apresentadas pela Empresarial Assessoria Contábil.",
-        "checkbox": "Confirmo que recebi previamente as orientações técnicas relacionadas à decisão."
       }
     ]
   },
