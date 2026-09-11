@@ -66,11 +66,6 @@
       </div>
 
       <div class="campo">
-        <label for="codigoInterno">Código interno da empresa <span class="opcional">opcional</span></label>
-        <input id="codigoInterno" name="codigoInterno" type="text" maxlength="40">
-      </div>
-
-      <div class="campo">
         <label for="emailEmpresa">E-mail da empresa <span class="obrig" aria-hidden="true">*</span></label>
         <input id="emailEmpresa" name="emailEmpresa" type="email" autocomplete="email" required maxlength="150">
         <p class="erro" data-erro="emailEmpresa"></p>
@@ -120,8 +115,9 @@
       </div>
 
       <div class="campo">
-        <label for="telefoneResponsavel">Telefone <span class="opcional">opcional</span></label>
-        <input id="telefoneResponsavel" name="telefoneResponsavel" type="tel" inputmode="tel" placeholder="(31) 90000-0000" maxlength="20">
+        <label for="telefoneResponsavel">Telefone <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="telefoneResponsavel" name="telefoneResponsavel" type="tel" inputmode="tel" placeholder="(31) 90000-0000" required maxlength="20">
+        <p class="erro" data-erro="telefoneResponsavel"></p>
       </div>
     </div>
 
@@ -158,6 +154,7 @@
       <h2 class="quadro__titulo" id="reconsideracaoTitulo">Prazo para reconsideração ou cancelamento da opção</h2>
       <p class="quadro__destaque" id="reconsideracaoData" hidden></p>
       <div id="reconsideracaoParagrafos"></div>
+      <p class="quadro__urgente" id="reconsideracaoAviso" hidden></p>
     </div>
 
     <div class="quadro quadro--alerta">
