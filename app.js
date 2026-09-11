@@ -890,10 +890,52 @@
       arquivo: { nome: pdf.nomeArquivo, base64: pdf.base64 }
     });
 
-    return fetch(endereco, {
+    // Duas salvaguardas aprendidas na prática:
+    //   1) tempo limite — sem ele, uma resposta que nunca chega deixa o
+    //      cliente preso na tela "gerando o termo";
+    //   2) segunda tentativa em modo no-cors — se o navegador bloquear a
+    //      leitura da resposta, o envio em si ainda acontece; o termo chega
+    //      ao escritório mesmo sem confirmação de volta.
+    var LIMITE_MS = 20000;
+
+    function comTempoLimite(promessa, controlador) {
+      return new Promise(function (resolve, reject) {
+        var relogio = setTimeout(function () {
+          if (controlador) controlador.abort();
+          reject(new Error('tempo-esgotado'));
+        }, LIMITE_MS);
+
+        promessa.then(
+          function (valor) { clearTimeout(relogio); resolve(valor); },
+          function (erro) { clearTimeout(relogio); reject(erro); }
+        );
+      });
+    }
+
+    function tentativaCega() {
+      // Sem leitura de resposta: serve para garantir a entrega quando a
+      // tentativa normal esbarra em bloqueio do navegador.
+      return fetch(endereco, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: corpo
+      })
+        .then(function () {
+          return { status: 'enviado-sem-confirmacao' };
+        })
+        .catch(function (erro) {
+          return { status: 'falhou', detalhe: erro.message };
+        });
+    }
+
+    var controlador = window.AbortController ? new AbortController() : null;
+
+    var tentativa = fetch(endereco, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: corpo
+      body: corpo,
+      signal: controlador ? controlador.signal : undefined
     })
       .then(function (resposta) {
         return resposta.json().catch(function () { return { ok: true }; });
@@ -903,10 +945,11 @@
           return { status: 'falhou', detalhe: retorno.erro || 'Erro no destino.' };
         }
         return { status: 'enviado', registro: retorno };
-      })
-      .catch(function (erro) {
-        return { status: 'falhou', detalhe: erro.message };
       });
+
+    return comTempoLimite(tentativa, controlador).catch(function () {
+      return tentativaCega();
+    });
   }
 
   function enviar() {
@@ -1004,6 +1047,11 @@
       aviso.textContent =
         'O termo foi enviado à Empresarial Assessoria Contábil. Guarde o número do protocolo; ' +
         'baixe também uma via em PDF para os seus arquivos.';
+    } else if (resultado.status === 'enviado-sem-confirmacao') {
+      aviso.textContent =
+        'O termo foi enviado à Empresarial Assessoria Contábil. Guarde o número do protocolo e ' +
+        'baixe uma via em PDF; se o escritório não confirmar o recebimento, encaminhe o arquivo ' +
+        'por e-mail informando o protocolo.';
     } else {
       aviso.classList.add('aviso-email--erro');
       aviso.textContent =
