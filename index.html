@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Termo de Ciência e Decisão — IBS e CBS | Empresarial Assessoria Contábil</title>
+<meta name="description" content="Formalização da ciência e da decisão da empresa quanto ao modelo de recolhimento do IBS e da CBS — clientes optantes pelo Simples Nacional.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/logo-pdf.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+<div class="faixa-demo" id="faixaDemo" hidden>
+  Modo demonstração — o termo é gerado, mas nada é enviado ao escritório.
+  Desative em <code>assets/conteudo.js</code> antes de divulgar o link.
+</div>
+
+<header class="topo">
+  <div class="topo__interno">
+    <img src="assets/logo.png" alt="Empresarial Assessoria Contábil" class="topo__logo">
+    <div class="topo__doc">
+      <span class="topo__doc-titulo">Termo de Ciência e Decisão</span>
+      <span class="topo__doc-sub">Reforma Tributária — IBS e CBS · Simples Nacional</span>
+      <span class="topo__selo">Envio seguro</span>
+    </div>
+  </div>
+</header>
+
+<nav class="trilha" aria-label="Etapas do formulário">
+  <div class="trilha__interno">
+    <ol class="trilha__lista" id="trilha"></ol>
+    <div class="trilha__barra"><span class="trilha__progresso" id="progresso"></span></div>
+  </div>
+</nav>
+
+<main class="folha" id="conteudo">
+
+  <!-- ETAPA 1 — EMPRESA -->
+  <section class="etapa" data-etapa="1" aria-labelledby="t-empresa">
+    <p class="etapa__contador">Etapa 1 de 8</p>
+    <h1 class="etapa__titulo" id="t-empresa">Identificação da empresa</h1>
+    <p class="etapa__intro">Informe os dados da empresa que está formalizando a decisão. Eles serão impressos no termo.</p>
+
+    <div class="campos">
+      <div class="campo campo--largo">
+        <label for="razaoSocial">Razão social <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="razaoSocial" name="razaoSocial" type="text" autocomplete="organization" required maxlength="200">
+        <p class="erro" data-erro="razaoSocial"></p>
+      </div>
+
+      <div class="campo">
+        <label for="nomeFantasia">Nome fantasia <span class="opcional">opcional</span></label>
+        <input id="nomeFantasia" name="nomeFantasia" type="text" maxlength="200">
+      </div>
+
+      <div class="campo">
+        <label for="cnpj">CNPJ <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" required maxlength="18">
+        <p class="erro" data-erro="cnpj"></p>
+      </div>
+
+      <div class="campo">
+        <label for="emailEmpresa">E-mail da empresa <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="emailEmpresa" name="emailEmpresa" type="email" autocomplete="email" required maxlength="150">
+        <p class="erro" data-erro="emailEmpresa"></p>
+      </div>
+
+      <div class="campo">
+        <label for="telefoneEmpresa">Telefone <span class="opcional">opcional</span></label>
+        <input id="telefoneEmpresa" name="telefoneEmpresa" type="tel" inputmode="tel" placeholder="(31) 0000-0000" maxlength="20">
+      </div>
+    </div>
+
+    <div class="acoes">
+      <span></span>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 2 — RESPONSÁVEL -->
+  <section class="etapa" data-etapa="2" hidden aria-labelledby="t-resp">
+    <p class="etapa__contador">Etapa 2 de 8</p>
+    <h1 class="etapa__titulo" id="t-resp">Identificação do responsável</h1>
+    <p class="etapa__intro">Dados de quem assina o termo em nome da empresa.</p>
+
+    <div class="campos">
+      <div class="campo campo--largo">
+        <label for="nomeResponsavel">Nome completo <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="nomeResponsavel" name="nomeResponsavel" type="text" autocomplete="name" required maxlength="150">
+        <p class="erro" data-erro="nomeResponsavel"></p>
+      </div>
+
+      <div class="campo">
+        <label for="cpf">CPF <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="cpf" name="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" required maxlength="14">
+        <p class="erro" data-erro="cpf"></p>
+      </div>
+
+      <div class="campo">
+        <label for="cargo">Cargo / função <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="cargo" name="cargo" type="text" required maxlength="120" placeholder="Sócio administrador, diretor, procurador…">
+        <p class="erro" data-erro="cargo"></p>
+      </div>
+
+      <div class="campo">
+        <label for="emailResponsavel">E-mail <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="emailResponsavel" name="emailResponsavel" type="email" autocomplete="email" required maxlength="150">
+        <p class="erro" data-erro="emailResponsavel"></p>
+      </div>
+
+      <div class="campo">
+        <label for="telefoneResponsavel">Telefone <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="telefoneResponsavel" name="telefoneResponsavel" type="tel" inputmode="tel" placeholder="(31) 90000-0000" required maxlength="20">
+        <p class="erro" data-erro="telefoneResponsavel"></p>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 3 — CONTEXTO -->
+  <section class="etapa" data-etapa="3" hidden aria-labelledby="t-contexto">
+    <p class="etapa__contador">Etapa 3 de 8</p>
+    <h1 class="etapa__titulo" id="t-contexto">Entenda o contexto da sua decisão</h1>
+
+    <div class="texto-legal" id="contextoParagrafos"></div>
+
+    <div class="quadro quadro--legal">
+      <h2 class="quadro__titulo" id="baseLegalTitulo">Base legal e regulamentação</h2>
+      <dl class="normas" id="baseLegalItens"></dl>
+    </div>
+
+    <h2 class="secao__titulo">A decisão da empresa</h2>
+    <p class="texto-legal" id="decisaoChamada"></p>
+
+    <div class="alternativas" id="alternativas"></div>
+
+    <div class="quadro quadro--prazo">
+      <h2 class="quadro__titulo">Prazo para formalização da decisão</h2>
+      <p class="quadro__destaque" id="prazoRotulo"></p>
+      <p class="quadro__texto" id="prazoObservacao"></p>
+    </div>
+
+    <div class="quadro quadro--atencao">
+      <h2 class="quadro__titulo" id="reconsideracaoTitulo">Prazo para reconsideração ou cancelamento da opção</h2>
+      <p class="quadro__destaque" id="reconsideracaoData" hidden></p>
+      <div id="reconsideracaoParagrafos"></div>
+      <p class="quadro__urgente" id="reconsideracaoAviso" hidden></p>
+    </div>
+
+    <div class="quadro quadro--alerta">
+      <h2 class="quadro__titulo" id="alertaTitulo">Importante</h2>
+      <div id="alertaParagrafos"></div>
+    </div>
+
+    <div class="aceite" id="aceiteContexto"></div>
+    <p class="erro" data-erro="aceiteContexto"></p>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 4 — CIÊNCIA -->
+  <section class="etapa" data-etapa="4" hidden aria-labelledby="t-ciencia">
+    <p class="etapa__contador">Etapa 4 de 8</p>
+    <h1 class="etapa__titulo" id="t-ciencia">Termo de ciência</h1>
+    <p class="etapa__intro">Leia cada declaração e confirme a ciência correspondente.</p>
+
+    <div id="cienciaItens"></div>
+    <p class="erro" data-erro="ciencia"></p>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 5 — DECISÃO -->
+  <section class="etapa" data-etapa="5" hidden aria-labelledby="t-formalizacao">
+    <p class="etapa__contador">Etapa 5 de 8</p>
+    <h1 class="etapa__titulo" id="t-formalizacao">Formalização da decisão</h1>
+    <p class="texto-legal" id="formalizacaoChamada"></p>
+
+    <fieldset class="opcoes" id="opcoesDecisao">
+      <legend class="sr">Modelo de recolhimento do IBS e da CBS</legend>
+    </fieldset>
+    <p class="erro" data-erro="decisao"></p>
+
+    <div class="quadro quadro--atencao">
+      <h2 class="quadro__titulo">Atenção</h2>
+      <p class="quadro__texto" id="decisaoAtencao"></p>
+    </div>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 6 — DECLARAÇÃO -->
+  <section class="etapa" data-etapa="6" hidden aria-labelledby="t-declaracao">
+    <p class="etapa__contador">Etapa 6 de 8</p>
+    <h1 class="etapa__titulo" id="t-declaracao">Declaração de ciência e decisão</h1>
+
+    <div class="declaracao" id="declaracaoParagrafos"></div>
+
+    <div class="aceite" id="aceiteDeclaracao"></div>
+    <p class="erro" data-erro="aceiteDeclaracao"></p>
+
+    <div class="quadro quadro--legal">
+      <h2 class="quadro__titulo">Tratamento de dados pessoais</h2>
+      <p class="quadro__texto" id="privacidadeAviso"></p>
+      <div class="aceite" id="aceitePrivacidade"></div>
+      <p class="erro" data-erro="aceitePrivacidade"></p>
+    </div>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 7 — ASSINATURA -->
+  <section class="etapa" data-etapa="7" hidden aria-labelledby="t-assinatura">
+    <p class="etapa__contador">Etapa 7 de 8</p>
+    <h1 class="etapa__titulo" id="t-assinatura">Assinatura do responsável</h1>
+    <p class="etapa__intro">Assine no campo abaixo usando o dedo, a caneta ou o mouse.</p>
+
+    <div class="campos">
+      <div class="campo campo--largo">
+        <label for="assinaturaNome">Nome completo do responsável <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="assinaturaNome" type="text" required maxlength="150">
+        <p class="erro" data-erro="assinaturaNome"></p>
+      </div>
+      <div class="campo">
+        <label for="assinaturaCpf">CPF <span class="obrig" aria-hidden="true">*</span></label>
+        <input id="assinaturaCpf" type="text" inputmode="numeric" required maxlength="14">
+        <p class="erro" data-erro="assinaturaCpf"></p>
+      </div>
+      <div class="campo">
+        <label for="assinaturaData">Data da assinatura</label>
+        <input id="assinaturaData" type="text" readonly>
+      </div>
+    </div>
+
+    <div class="assinatura">
+      <div class="assinatura__papel">
+        <canvas id="canvasAssinatura" aria-label="Área de assinatura"></canvas>
+        <span class="assinatura__linha" aria-hidden="true"></span>
+        <span class="assinatura__dica" id="dicaAssinatura">Assine aqui</span>
+      </div>
+      <div class="assinatura__rodape">
+        <span class="assinatura__legenda">Assinatura do responsável pela empresa</span>
+        <button type="button" class="btn btn--texto" id="limparAssinatura">Limpar assinatura</button>
+      </div>
+    </div>
+    <p class="erro" data-erro="assinatura"></p>
+
+    <div class="acoes">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal" data-avancar>Revisar termo</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 8 — REVISÃO -->
+  <section class="etapa" data-etapa="8" hidden aria-labelledby="t-revisao">
+    <p class="etapa__contador">Etapa 8 de 8</p>
+    <h1 class="etapa__titulo" id="t-revisao">Revisão e confirmação</h1>
+    <p class="etapa__intro">Confira as informações antes de formalizar. Após a confirmação, o termo é gerado e enviado ao escritório.</p>
+
+    <div class="revisao" id="revisao"></div>
+
+    <div class="acoes acoes--final">
+      <button type="button" class="btn btn--secundario" data-voltar>Voltar</button>
+      <button type="button" class="btn btn--principal btn--confirmar" id="btnConfirmar">Confirmar e formalizar decisão</button>
+    </div>
+  </section>
+
+  <!-- SUCESSO -->
+  <section class="etapa etapa--sucesso" data-etapa="9" hidden aria-labelledby="t-sucesso">
+    <div class="sucesso__selo" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="46" height="46" role="presentation">
+        <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M15 24.5l6.5 6.5L33 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1 class="etapa__titulo" id="t-sucesso">Decisão formalizada</h1>
+    <p class="etapa__intro" id="mensagemSucesso">Sua manifestação foi registrada e encaminhada para a Empresarial Assessoria Contábil.</p>
+
+    <dl class="comprovante" id="comprovante"></dl>
+
+    <p class="aviso-email" id="avisoEmail" hidden></p>
+
+    <div class="acoes acoes--final">
+      <button type="button" class="btn btn--secundario" id="baixarPdf">Baixar termo em PDF</button>
+      <button type="button" class="btn btn--principal" id="btnFinalizar">Finalizar</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <p class="rodape__nome">Empresarial Assessoria Contábil</p>
+  <p class="rodape__linha">R. dos Guajajaras, 40, sala 605 — Centro, Belo Horizonte/MG · contato@empresarialsc.com.br</p>
+</footer>
+
+<!-- Modal de confirmação -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__caixa" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" aria-describedby="modalTexto">
+    <h2 class="modal__titulo" id="modalTitulo">Você confirma que deseja formalizar esta decisão?</h2>
+    <p class="modal__texto" id="modalTexto">O termo será assinado, protocolado e enviado à Empresarial Assessoria Contábil.</p>
+    <p class="modal__decisao" id="modalDecisao"></p>
+    <div class="modal__acoes">
+      <button type="button" class="btn btn--secundario" id="modalVoltar">Voltar e revisar</button>
+      <button type="button" class="btn btn--principal" id="modalConfirmar">Sim, confirmar decisão</button>
+    </div>
+  </div>
+</div>
+
+<!-- Estado de processamento -->
+<div class="processando" id="processando" hidden>
+  <div class="processando__caixa">
+    <span class="processando__marca" aria-hidden="true"></span>
+    <p class="processando__texto">Gerando o termo e enviando ao escritório…</p>
+  </div>
+</div>
+
+<div class="aviso-erro" id="avisoErro" role="alert" hidden></div>
+
+<!-- jsPDF: gera o termo em PDF dentro do próprio navegador do cliente -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="assets/conteudo.js" defer></script>
+<script src="assets/pdf.js" defer></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
