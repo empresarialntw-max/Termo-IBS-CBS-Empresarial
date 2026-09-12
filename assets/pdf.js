@@ -329,7 +329,6 @@
       ['Razão social', registro.empresa.razaoSocial],
       ['CNPJ', registro.empresa.cnpj],
       ['Nome fantasia', registro.empresa.nomeFantasia],
-      ['Código interno', registro.empresa.codigoInterno],
       ['E-mail', registro.empresa.email],
       ['Telefone', registro.empresa.telefone]
     ]);
@@ -383,6 +382,25 @@
     });
 
     caixa(ctx, { titulo: 'Prazos aplicáveis', fundo: COR.destaque, linhas: linhasPrazo });
+
+    // O aviso de urgência ganha caixa própria, para não se perder no meio
+    // dos demais parágrafos de prazo.
+    if (conteudo.reconsideracaoTexto.aviso) {
+      caixa(ctx, {
+        titulo: 'Atenção ao tempo de resposta',
+        fundo: [253, 246, 230],
+        borda: [184, 134, 11],
+        linhas: [
+          {
+            texto: conteudo.reconsideracaoTexto.aviso,
+            fonte: 'helvetica',
+            estilo: 'bold',
+            tamanho: 8.8,
+            cor: [92, 71, 9]
+          }
+        ]
+      });
+    }
 
     // 4 — ciência
     tituloSecao(ctx, 4, 'Termo de ciência');

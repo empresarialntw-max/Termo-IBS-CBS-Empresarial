@@ -1086,3 +1086,20 @@ body {
   border-left-color: var(--alerta-borda);
   color: #6d1f24;
 }
+
+/* Aviso de urgência dentro de um quadro (etapa 3).
+   Fica separado dos parágrafos acima e com contraste próprio, para ser
+   lido antes do resto do quadro. */
+.quadro__urgente {
+  margin: 24px 0 4px !important;
+  padding: 16px 18px;
+  background: #fff;
+  border: 2px solid var(--atencao-borda);
+  border-radius: var(--raio);
+  box-shadow: 0 2px 10px rgba(120, 90, 10, 0.12);
+  font-family: "Inter", sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #5c4709 !important;
+}
